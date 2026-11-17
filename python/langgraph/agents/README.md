@@ -84,3 +84,7 @@
   fixed graph  →  tool calling  →  parallel  →  config  →  hierarchy
   ───────────────────────────────────────────────────────────────────
 ```
+
+## Porting to Langflow
+
+See [LANGFLOW_PORTING.md](LANGFLOW_PORTING.md) for a node-by-node guide to rebuilding basic-RAG and corrective-rag as Langflow flows.
