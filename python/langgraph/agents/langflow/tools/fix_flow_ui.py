@@ -51,3 +51,15 @@ for path in sys.argv[1:]:
             if k in t: t[k]["show"] = retrieve
         n["data"]["selected_output"] = "retrieve_data" if retrieve else "dataframe_output"
     json.dump(flow, open(path, "w"), indent=2)
+
+# Collapse nodes holding long list inputs (e.g. URL with dozens of URLs) so the
+# canvas stays readable; the user can expand them in the editor.
+LONG_LIST = 10
+for path in sys.argv[1:]:
+    flow = json.load(open(path))
+    for n in flow["data"]["nodes"]:
+        t = n["data"]["node"]["template"]
+        if any(isinstance(f, dict) and isinstance(f.get("value"), list) and f.get("list")
+               and len(f["value"]) > LONG_LIST for f in t.values()):
+            n["data"]["showNode"] = False
+    json.dump(flow, open(path, "w"), indent=2)

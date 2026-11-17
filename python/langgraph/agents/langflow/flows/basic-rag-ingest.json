@@ -439,12 +439,13 @@
           "id": "URL-ingest",
           "display_name": "URL",
           "description": "Fetch content from one or more web pages, following links recursively.",
-          "selected_output": "page_results"
+          "selected_output": "page_results",
+          "showNode": false
         },
         "id": "URL-ingest",
         "position": {
           "x": 0,
-          "y": 100
+          "y": 160
         },
         "type": "genericNode",
         "selected": false,
@@ -967,7 +968,7 @@
         },
         "id": "Knowledge-ingest",
         "position": {
-          "x": 840,
+          "x": 760,
           "y": 100
         },
         "type": "genericNode",
@@ -1215,7 +1216,7 @@
         },
         "id": "SplitText-ingest",
         "position": {
-          "x": 420,
+          "x": 380,
           "y": 100
         },
         "type": "genericNode",
