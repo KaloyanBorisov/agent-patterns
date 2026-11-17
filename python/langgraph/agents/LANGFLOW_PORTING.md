@@ -185,15 +185,24 @@ Starting from the Stage 1 flow, change three things:
    Chat Input ─┬─► Knowledge (Retrieve, top_k 4) ─► Parser ({content}) ─┐
                │                                                         ▼
                │   Message History (Retrieve, last 10) ───────────► Prompt Template ─► Language Model ─► Chat Output
-               └──────────────────────────────────────────────────►  (RAG_PROMPT)      (gpt-4o, temp 0)
+               └──────────────────────────────────────────────────►  (RAG_PROMPT)      (gpt-6.1-terra)
    ```
 
    It answers basic-RAG's three test questions, and the follow-ups resolve
    "it" and "that" from the message history.
-   Gotcha: the **Language Model** `model` field must be a list such as
-   `[{"name": "gpt-4o", "provider": "OpenAI", "metadata": {}}]`. Setting only
-   the name/provider override fields fails with "Model name/provider overrides
-   require a built-in model selection".
+   **Model:** the flow uses `gpt-6.1-terra` rather than basic-RAG's `gpt-4o`.
+   The 1.13 model picker only lists newer models (`gpt-6.1-*`, `gpt-6-*`,
+   `gemini-4-*`, ...). If a flow names a model that isn't listed, the editor
+   swaps in the first listed model and auto-saves the change. Pick a model
+   from the list so the model shown on the canvas is the one that runs.
+
+   **Generating flows in code:** `lfx` `Graph.dump()` writes the format the
+   backend runs, not the one the editor draws. Nodes show up as empty boxes
+   with no connection lines, and a Knowledge node in *Retrieve* mode keeps
+   its *Ingest* fields visible. Run
+   [langflow/tools/fix_flow_ui.py](langflow/tools/fix_flow_ui.py) on the
+   dumped JSON before importing it. After you open a flow in the editor,
+   export it again so the repo copy matches what the editor saved.
 2. Add grading and If-Else with one rewrite retry → **basic-RAG**.
 3. Switch the condition to the 50% threshold and add the web-search branch →
    **corrective-rag**.

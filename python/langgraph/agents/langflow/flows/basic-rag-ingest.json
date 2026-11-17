@@ -436,13 +436,19 @@
             "tool_mode": false
           },
           "type": "URLComponent",
-          "id": "URL-ingest"
+          "id": "URL-ingest",
+          "display_name": "URL",
+          "description": "Fetch content from one or more web pages, following links recursively.",
+          "selected_output": "page_results"
         },
         "id": "URL-ingest",
         "position": {
           "x": 0,
           "y": 100
-        }
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false
       },
       {
         "data": {
@@ -954,13 +960,19 @@
             "tool_mode": false
           },
           "type": "Knowledge",
-          "id": "Knowledge-ingest"
+          "id": "Knowledge-ingest",
+          "display_name": "Knowledge",
+          "description": "Ingest into or retrieve from a Langflow knowledge base.",
+          "selected_output": "dataframe_output"
         },
         "id": "Knowledge-ingest",
         "position": {
           "x": 840,
           "y": 100
-        }
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false
       },
       {
         "data": {
@@ -1196,13 +1208,19 @@
             "tool_mode": false
           },
           "type": "SplitText",
-          "id": "SplitText-ingest"
+          "id": "SplitText-ingest",
+          "display_name": "Split Text",
+          "description": "Split text into chunks based on specified criteria.",
+          "selected_output": "dataframe"
         },
         "id": "SplitText-ingest",
         "position": {
           "x": 420,
           "y": 100
-        }
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false
       }
     ],
     "edges": [
@@ -1230,7 +1248,13 @@
             ],
             "type": "other"
           }
-        }
+        },
+        "sourceHandle": "{\u0153dataType\u0153:\u0153SplitText\u0153,\u0153id\u0153:\u0153SplitText-ingest\u0153,\u0153name\u0153:\u0153dataframe\u0153,\u0153output_types\u0153:[\u0153Table\u0153]}",
+        "targetHandle": "{\u0153fieldName\u0153:\u0153input_df\u0153,\u0153id\u0153:\u0153Knowledge-ingest\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153,\u0153Data\u0153,\u0153JSON\u0153,\u0153DataFrame\u0153,\u0153Table\u0153],\u0153type\u0153:\u0153other\u0153}",
+        "id": "reactflow__edge-SplitText-ingest{\u0153dataType\u0153:\u0153SplitText\u0153,\u0153id\u0153:\u0153SplitText-ingest\u0153,\u0153name\u0153:\u0153dataframe\u0153,\u0153output_types\u0153:[\u0153Table\u0153]}-Knowledge-ingest{\u0153fieldName\u0153:\u0153input_df\u0153,\u0153id\u0153:\u0153Knowledge-ingest\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153,\u0153Data\u0153,\u0153JSON\u0153,\u0153DataFrame\u0153,\u0153Table\u0153],\u0153type\u0153:\u0153other\u0153}",
+        "animated": false,
+        "className": "",
+        "selected": false
       },
       {
         "source": "URL-ingest",
@@ -1256,7 +1280,13 @@
             ],
             "type": "other"
           }
-        }
+        },
+        "sourceHandle": "{\u0153dataType\u0153:\u0153URLComponent\u0153,\u0153id\u0153:\u0153URL-ingest\u0153,\u0153name\u0153:\u0153page_results\u0153,\u0153output_types\u0153:[\u0153Table\u0153]}",
+        "targetHandle": "{\u0153fieldName\u0153:\u0153data_inputs\u0153,\u0153id\u0153:\u0153SplitText-ingest\u0153,\u0153inputTypes\u0153:[\u0153Data\u0153,\u0153JSON\u0153,\u0153DataFrame\u0153,\u0153Table\u0153,\u0153Message\u0153],\u0153type\u0153:\u0153other\u0153}",
+        "id": "reactflow__edge-URL-ingest{\u0153dataType\u0153:\u0153URLComponent\u0153,\u0153id\u0153:\u0153URL-ingest\u0153,\u0153name\u0153:\u0153page_results\u0153,\u0153output_types\u0153:[\u0153Table\u0153]}-SplitText-ingest{\u0153fieldName\u0153:\u0153data_inputs\u0153,\u0153id\u0153:\u0153SplitText-ingest\u0153,\u0153inputTypes\u0153:[\u0153Data\u0153,\u0153JSON\u0153,\u0153DataFrame\u0153,\u0153Table\u0153,\u0153Message\u0153],\u0153type\u0153:\u0153other\u0153}",
+        "animated": false,
+        "className": "",
+        "selected": false
       }
     ],
     "viewport": {

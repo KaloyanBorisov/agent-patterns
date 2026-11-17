@@ -269,12 +269,22 @@
             "tool_mode": false
           },
           "type": "ChatInput",
-          "id": "ChatInput-rag"
+          "id": "ChatInput-rag",
+          "display_name": "Chat Input",
+          "description": "Get chat inputs from the Playground.",
+          "selected_output": "message"
         },
         "id": "ChatInput-rag",
         "position": {
           "x": 0,
           "y": 200
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false,
+        "measured": {
+          "width": 340,
+          "height": 219
         }
       },
       {
@@ -540,12 +550,22 @@
             "tool_mode": false
           },
           "type": "ChatOutput",
-          "id": "ChatOutput-rag"
+          "id": "ChatOutput-rag",
+          "display_name": "Chat Output",
+          "description": "Display a chat message in the Playground.",
+          "selected_output": "message"
         },
         "id": "ChatOutput-rag",
         "position": {
           "x": 1900,
           "y": 200
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false,
+        "measured": {
+          "width": 340,
+          "height": 179
         }
       },
       {
@@ -566,7 +586,7 @@
                 "api_editable": false,
                 "input_types": [],
                 "dynamic": false,
-                "info": "Overrides global provider settings. Leave blank to use your pre-configured API Key.",
+                "info": "Falls back to OPENAI_API_KEY environment variable",
                 "real_time_refresh": true,
                 "title_case": false,
                 "track_in_telemetry": false,
@@ -708,9 +728,9 @@
                 "trace_as_metadata": true,
                 "range_spec": {
                   "step_type": "int",
-                  "min": 0.0,
-                  "max": 128000.0,
-                  "step": 1.0
+                  "min": 0,
+                  "max": 128000,
+                  "step": 1
                 },
                 "list": false,
                 "list_add_label": "Add More",
@@ -768,9 +788,192 @@
                 "_input_type": "ModelInput",
                 "value": [
                   {
-                    "name": "gpt-4o",
+                    "name": "gpt-6.1-terra",
+                    "icon": "OpenAI",
                     "provider": "OpenAI",
-                    "metadata": {}
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "api_key_param": "api_key",
+                      "max_tokens_field_name": "max_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gpt-6.1-terra"
+                      ]
+                    }
+                  }
+                ],
+                "options": [
+                  {
+                    "name": "gpt-6.1-terra",
+                    "icon": "OpenAI",
+                    "category": "OpenAI",
+                    "provider": "OpenAI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "api_key_param": "api_key",
+                      "max_tokens_field_name": "max_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gpt-6.1-terra"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "gpt-6.1-sol",
+                    "icon": "OpenAI",
+                    "category": "OpenAI",
+                    "provider": "OpenAI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "api_key_param": "api_key",
+                      "max_tokens_field_name": "max_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gpt-6.1-sol"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "gpt-6-sol",
+                    "icon": "OpenAI",
+                    "category": "OpenAI",
+                    "provider": "OpenAI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "api_key_param": "api_key",
+                      "max_tokens_field_name": "max_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gpt-6-sol"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "gpt-6-luna",
+                    "icon": "OpenAI",
+                    "category": "OpenAI",
+                    "provider": "OpenAI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "api_key_param": "api_key",
+                      "max_tokens_field_name": "max_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gpt-6-luna"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "gpt-6-astra",
+                    "icon": "OpenAI",
+                    "category": "OpenAI",
+                    "provider": "OpenAI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "api_key_param": "api_key",
+                      "max_tokens_field_name": "max_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gpt-6-astra"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "gemini-4-hydrogen",
+                    "icon": "GoogleGenerativeAI",
+                    "category": "Google Generative AI",
+                    "provider": "Google Generative AI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatGoogleGenerativeAIFixed",
+                      "model_name_param": "model",
+                      "api_key_param": "google_api_key",
+                      "max_tokens_field_name": "max_output_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gemini-4-hydrogen"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "gemini-4-carbon",
+                    "icon": "GoogleGenerativeAI",
+                    "category": "Google Generative AI",
+                    "provider": "Google Generative AI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatGoogleGenerativeAIFixed",
+                      "model_name_param": "model",
+                      "api_key_param": "google_api_key",
+                      "max_tokens_field_name": "max_output_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gemini-4-carbon"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "gemini-4-argon",
+                    "icon": "GoogleGenerativeAI",
+                    "category": "Google Generative AI",
+                    "provider": "Google Generative AI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatGoogleGenerativeAIFixed",
+                      "model_name_param": "model",
+                      "api_key_param": "google_api_key",
+                      "max_tokens_field_name": "max_output_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gemini-4-argon"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "gemini-3.8-flash",
+                    "icon": "GoogleGenerativeAI",
+                    "category": "Google Generative AI",
+                    "provider": "Google Generative AI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatGoogleGenerativeAIFixed",
+                      "model_name_param": "model",
+                      "api_key_param": "google_api_key",
+                      "max_tokens_field_name": "max_output_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gemini-3.8-flash"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "gemini-flash-latest",
+                    "icon": "GoogleGenerativeAI",
+                    "category": "Google Generative AI",
+                    "provider": "Google Generative AI",
+                    "metadata": {
+                      "context_length": 128000,
+                      "model_class": "ChatGoogleGenerativeAIFixed",
+                      "model_name_param": "model",
+                      "api_key_param": "google_api_key",
+                      "max_tokens_field_name": "max_output_tokens",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "gemini-flash-latest"
+                      ]
+                    }
                   }
                 ]
               },
@@ -785,7 +988,7 @@
                 "placeholder": "",
                 "show": true,
                 "name": "model_name",
-                "value": "gpt-4o",
+                "value": "",
                 "display_name": "Model Name Override",
                 "advanced": true,
                 "api_editable": false,
@@ -852,7 +1055,7 @@
                 "placeholder": "",
                 "show": true,
                 "name": "provider",
-                "value": "OpenAI",
+                "value": "",
                 "display_name": "Provider Override",
                 "advanced": true,
                 "api_editable": false,
@@ -927,8 +1130,8 @@
                 "slider_color": "default",
                 "range_spec": {
                   "step_type": "float",
-                  "min": 0.0,
-                  "max": 1.0,
+                  "min": 0,
+                  "max": 1,
                   "step": 0.01
                 },
                 "override_skip": false,
@@ -946,7 +1149,14 @@
                 "track_in_telemetry": false,
                 "type": "slider",
                 "_input_type": "SliderInput"
-              }
+              },
+              "_frontend_node_flow_id": {
+                "value": "4672a4da-2865-40c5-b83b-36ef667e1db0"
+              },
+              "_frontend_node_folder_id": {
+                "value": "50bcea5a-6acc-438b-aae8-238aa80429f7"
+              },
+              "is_refresh": false
             },
             "description": "Runs a language model given a specified provider.",
             "icon": "brain-circuit",
@@ -969,12 +1179,16 @@
                 ],
                 "selected": "Message",
                 "name": "text_output",
+                "hidden": null,
                 "display_name": "Model Response",
                 "method": "text_response",
                 "value": "__UNDEFINED__",
                 "cache": true,
+                "required_inputs": null,
                 "allows_loop": false,
+                "loop_types": null,
                 "group_outputs": false,
+                "options": null,
                 "tool_mode": true
               },
               {
@@ -983,12 +1197,16 @@
                 ],
                 "selected": "LanguageModel",
                 "name": "model_output",
+                "hidden": null,
                 "display_name": "Language Model",
                 "method": "build_model",
                 "value": "__UNDEFINED__",
                 "cache": true,
+                "required_inputs": null,
                 "allows_loop": false,
+                "loop_types": null,
                 "group_outputs": false,
+                "options": null,
                 "tool_mode": true
               }
             ],
@@ -1004,15 +1222,26 @@
                 "large language model"
               ]
             },
-            "tool_mode": false
+            "tool_mode": false,
+            "last_updated": "2026-11-17T02:36:26.238Z"
           },
           "type": "LanguageModelComponent",
-          "id": "LanguageModel-rag"
+          "id": "LanguageModel-rag",
+          "display_name": "Language Model",
+          "description": "Runs a language model given a specified provider.",
+          "selected_output": "text_output"
         },
         "id": "LanguageModel-rag",
         "position": {
           "x": 1520,
           "y": 200
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false,
+        "measured": {
+          "width": 340,
+          "height": 393
         }
       },
       {
@@ -1218,12 +1447,22 @@
             "tool_mode": false
           },
           "type": "Prompt Template",
-          "id": "Prompt-rag"
+          "id": "Prompt-rag",
+          "display_name": "Prompt Template",
+          "description": "Create a prompt template with dynamic variables.",
+          "selected_output": "prompt"
         },
         "id": "Prompt-rag",
         "position": {
           "x": 1140,
           "y": 200
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false,
+        "measured": {
+          "width": 340,
+          "height": 535
         }
       },
       {
@@ -1588,12 +1827,22 @@
             "tool_mode": false
           },
           "type": "Memory",
-          "id": "Memory-history"
+          "id": "Memory-history",
+          "display_name": "Message History",
+          "description": "Stores or retrieves stored chat messages from Langflow tables or an external memory.",
+          "selected_output": "messages_text"
         },
         "id": "Memory-history",
         "position": {
           "x": 760,
-          "y": 360
+          "y": 560
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false,
+        "measured": {
+          "width": 340,
+          "height": 234
         }
       },
       {
@@ -1764,12 +2013,22 @@
             "tool_mode": false
           },
           "type": "ParserComponent",
-          "id": "Parser-context"
+          "id": "Parser-context",
+          "display_name": "Parser",
+          "description": "Extracts text using a template.",
+          "selected_output": "parsed_text"
         },
         "id": "Parser-context",
         "position": {
           "x": 760,
           "y": 60
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false,
+        "measured": {
+          "width": 340,
+          "height": 351
         }
       },
       {
@@ -1784,7 +2043,7 @@
                 "override_skip": false,
                 "required": true,
                 "placeholder": "",
-                "show": true,
+                "show": false,
                 "name": "input_df",
                 "value": "",
                 "display_name": "Input",
@@ -1812,7 +2071,7 @@
                 "override_skip": false,
                 "required": false,
                 "placeholder": "",
-                "show": true,
+                "show": false,
                 "name": "allow_duplicates",
                 "value": false,
                 "display_name": "Allow Duplicates",
@@ -1830,7 +2089,7 @@
                 "override_skip": false,
                 "required": false,
                 "placeholder": "",
-                "show": true,
+                "show": false,
                 "name": "api_key",
                 "value": "",
                 "display_name": "Embedding Provider API Key",
@@ -1853,7 +2112,7 @@
                 "override_skip": false,
                 "required": false,
                 "placeholder": "",
-                "show": true,
+                "show": false,
                 "name": "chunk_size",
                 "value": 1000,
                 "display_name": "Chunk Size",
@@ -1921,7 +2180,7 @@
                 "override_skip": false,
                 "required": true,
                 "placeholder": "",
-                "show": true,
+                "show": false,
                 "name": "column_config",
                 "value": [
                   {
@@ -1952,7 +2211,7 @@
                 "override_skip": false,
                 "required": false,
                 "placeholder": "",
-                "show": false,
+                "show": true,
                 "name": "include_embeddings",
                 "value": false,
                 "display_name": "Include Embeddings",
@@ -1973,7 +2232,7 @@
                 "override_skip": false,
                 "required": false,
                 "placeholder": "",
-                "show": false,
+                "show": true,
                 "name": "include_metadata",
                 "value": true,
                 "display_name": "Include Metadata",
@@ -1989,7 +2248,9 @@
               "knowledge_base": {
                 "tool_mode": false,
                 "trace_as_metadata": true,
-                "options": [],
+                "options": [
+                  "langgraph-docs"
+                ],
                 "options_metadata": [],
                 "combobox": false,
                 "dialog_inputs": {
@@ -2063,7 +2324,106 @@
                             "title_case": false,
                             "track_in_telemetry": false,
                             "type": "model",
-                            "_input_type": "ModelInput"
+                            "_input_type": "ModelInput",
+                            "options": [
+                              {
+                                "name": "text-embedding-3-small",
+                                "icon": "OpenAI",
+                                "category": "OpenAI",
+                                "provider": "OpenAI",
+                                "metadata": {
+                                  "embedding_class": "OpenAIEmbeddings",
+                                  "param_mapping": {
+                                    "model": "model",
+                                    "api_key": "api_key",
+                                    "api_base": "base_url",
+                                    "dimensions": "dimensions",
+                                    "chunk_size": "chunk_size",
+                                    "request_timeout": "timeout",
+                                    "max_retries": "max_retries",
+                                    "show_progress_bar": "show_progress_bar",
+                                    "model_kwargs": "model_kwargs"
+                                  },
+                                  "model_type": "embeddings"
+                                }
+                              },
+                              {
+                                "name": "text-embedding-3-large",
+                                "icon": "OpenAI",
+                                "category": "OpenAI",
+                                "provider": "OpenAI",
+                                "metadata": {
+                                  "embedding_class": "OpenAIEmbeddings",
+                                  "param_mapping": {
+                                    "model": "model",
+                                    "api_key": "api_key",
+                                    "api_base": "base_url",
+                                    "dimensions": "dimensions",
+                                    "chunk_size": "chunk_size",
+                                    "request_timeout": "timeout",
+                                    "max_retries": "max_retries",
+                                    "show_progress_bar": "show_progress_bar",
+                                    "model_kwargs": "model_kwargs"
+                                  },
+                                  "model_type": "embeddings"
+                                }
+                              },
+                              {
+                                "name": "text-embedding-ada-002",
+                                "icon": "OpenAI",
+                                "category": "OpenAI",
+                                "provider": "OpenAI",
+                                "metadata": {
+                                  "embedding_class": "OpenAIEmbeddings",
+                                  "param_mapping": {
+                                    "model": "model",
+                                    "api_key": "api_key",
+                                    "api_base": "base_url",
+                                    "dimensions": "dimensions",
+                                    "chunk_size": "chunk_size",
+                                    "request_timeout": "timeout",
+                                    "max_retries": "max_retries",
+                                    "show_progress_bar": "show_progress_bar",
+                                    "model_kwargs": "model_kwargs"
+                                  },
+                                  "model_type": "embeddings"
+                                }
+                              },
+                              {
+                                "name": "gemini-embedding-2",
+                                "icon": "GoogleGenerativeAI",
+                                "category": "Google Generative AI",
+                                "provider": "Google Generative AI",
+                                "metadata": {
+                                  "embedding_class": "GoogleGenerativeAIEmbeddings",
+                                  "param_mapping": {
+                                    "model": "model",
+                                    "api_key": "google_api_key",
+                                    "dimensions": "output_dimensionality",
+                                    "request_timeout": "request_options",
+                                    "model_kwargs": "client_options"
+                                  },
+                                  "model_type": "embeddings"
+                                }
+                              },
+                              {
+                                "name": "models/gemini-embedding-001",
+                                "icon": "GoogleGenerativeAI",
+                                "category": "Google Generative AI",
+                                "provider": "Google Generative AI",
+                                "metadata": {
+                                  "embedding_class": "GoogleGenerativeAIEmbeddings",
+                                  "param_mapping": {
+                                    "model": "model",
+                                    "api_key": "google_api_key",
+                                    "dimensions": "output_dimensionality",
+                                    "request_timeout": "request_options",
+                                    "model_kwargs": "client_options"
+                                  },
+                                  "model_type": "embeddings"
+                                }
+                              }
+                            ]
                           },
                           "03_knowledge_backend": {
                             "tool_mode": false,
@@ -2120,7 +2480,7 @@
                 "override_skip": false,
                 "required": false,
                 "placeholder": "",
-                "show": false,
+                "show": true,
                 "name": "metadata_filter",
                 "value": "",
                 "display_name": "Metadata Filter",
@@ -2145,7 +2505,7 @@
                 "override_skip": false,
                 "required": false,
                 "placeholder": "",
-                "show": true,
+                "show": false,
                 "name": "metadata_json",
                 "value": "",
                 "display_name": "Metadata",
@@ -2192,7 +2552,7 @@
                 "override_skip": false,
                 "required": false,
                 "placeholder": "",
-                "show": false,
+                "show": true,
                 "name": "search_query",
                 "value": "",
                 "display_name": "Search Query",
@@ -2216,7 +2576,7 @@
                 "override_skip": false,
                 "required": false,
                 "placeholder": "",
-                "show": false,
+                "show": true,
                 "name": "top_k",
                 "value": 4,
                 "display_name": "Top K Results",
@@ -2228,7 +2588,14 @@
                 "track_in_telemetry": true,
                 "type": "int",
                 "_input_type": "IntInput"
-              }
+              },
+              "_frontend_node_flow_id": {
+                "value": "4672a4da-2865-40c5-b83b-36ef667e1db0"
+              },
+              "_frontend_node_folder_id": {
+                "value": "50bcea5a-6acc-438b-aae8-238aa80429f7"
+              },
+              "is_refresh": false
             },
             "description": "Ingest into or retrieve from a Langflow knowledge base.",
             "icon": "database",
@@ -2255,8 +2622,11 @@
                 "method": "build_kb_info",
                 "value": "__UNDEFINED__",
                 "cache": true,
+                "required_inputs": null,
                 "allows_loop": false,
+                "loop_types": null,
                 "group_outputs": false,
+                "options": null,
                 "tool_mode": true
               },
               {
@@ -2269,8 +2639,11 @@
                 "method": "retrieve_data",
                 "value": "__UNDEFINED__",
                 "cache": true,
+                "required_inputs": null,
                 "allows_loop": false,
+                "loop_types": null,
                 "group_outputs": false,
+                "options": null,
                 "tool_mode": true
               }
             ],
@@ -2279,15 +2652,26 @@
             "legacy": false,
             "edited": false,
             "metadata": {},
-            "tool_mode": false
+            "tool_mode": false,
+            "last_updated": "2026-11-17T02:36:25.570Z"
           },
           "type": "Knowledge",
-          "id": "Knowledge-retrieve"
+          "id": "Knowledge-retrieve",
+          "display_name": "Knowledge",
+          "description": "Ingest into or retrieve from a Langflow knowledge base.",
+          "selected_output": "retrieve_data"
         },
         "id": "Knowledge-retrieve",
         "position": {
           "x": 380,
           "y": 60
+        },
+        "type": "genericNode",
+        "selected": false,
+        "dragging": false,
+        "measured": {
+          "width": 340,
+          "height": 454
         }
       }
     ],
@@ -2316,7 +2700,13 @@
             ],
             "type": "other"
           }
-        }
+        },
+        "sourceHandle": "{\u0153dataType\u0153:\u0153LanguageModelComponent\u0153,\u0153id\u0153:\u0153LanguageModel-rag\u0153,\u0153name\u0153:\u0153text_output\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}",
+        "targetHandle": "{\u0153fieldName\u0153:\u0153input_value\u0153,\u0153id\u0153:\u0153ChatOutput-rag\u0153,\u0153inputTypes\u0153:[\u0153Data\u0153,\u0153JSON\u0153,\u0153DataFrame\u0153,\u0153Table\u0153,\u0153Message\u0153],\u0153type\u0153:\u0153other\u0153}",
+        "id": "reactflow__edge-LanguageModel-rag{\u0153dataType\u0153:\u0153LanguageModelComponent\u0153,\u0153id\u0153:\u0153LanguageModel-rag\u0153,\u0153name\u0153:\u0153text_output\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}-ChatOutput-rag{\u0153fieldName\u0153:\u0153input_value\u0153,\u0153id\u0153:\u0153ChatOutput-rag\u0153,\u0153inputTypes\u0153:[\u0153Data\u0153,\u0153JSON\u0153,\u0153DataFrame\u0153,\u0153Table\u0153,\u0153Message\u0153],\u0153type\u0153:\u0153other\u0153}",
+        "animated": false,
+        "className": "",
+        "selected": false
       },
       {
         "source": "Prompt-rag",
@@ -2338,7 +2728,13 @@
             ],
             "type": "str"
           }
-        }
+        },
+        "sourceHandle": "{\u0153dataType\u0153:\u0153Prompt Template\u0153,\u0153id\u0153:\u0153Prompt-rag\u0153,\u0153name\u0153:\u0153prompt\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}",
+        "targetHandle": "{\u0153fieldName\u0153:\u0153input_value\u0153,\u0153id\u0153:\u0153LanguageModel-rag\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "id": "reactflow__edge-Prompt-rag{\u0153dataType\u0153:\u0153Prompt Template\u0153,\u0153id\u0153:\u0153Prompt-rag\u0153,\u0153name\u0153:\u0153prompt\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}-LanguageModel-rag{\u0153fieldName\u0153:\u0153input_value\u0153,\u0153id\u0153:\u0153LanguageModel-rag\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "animated": false,
+        "className": "",
+        "selected": false
       },
       {
         "source": "Memory-history",
@@ -2360,7 +2756,13 @@
             ],
             "type": "str"
           }
-        }
+        },
+        "sourceHandle": "{\u0153dataType\u0153:\u0153Memory\u0153,\u0153id\u0153:\u0153Memory-history\u0153,\u0153name\u0153:\u0153messages_text\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}",
+        "targetHandle": "{\u0153fieldName\u0153:\u0153history\u0153,\u0153id\u0153:\u0153Prompt-rag\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "id": "reactflow__edge-Memory-history{\u0153dataType\u0153:\u0153Memory\u0153,\u0153id\u0153:\u0153Memory-history\u0153,\u0153name\u0153:\u0153messages_text\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}-Prompt-rag{\u0153fieldName\u0153:\u0153history\u0153,\u0153id\u0153:\u0153Prompt-rag\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "animated": false,
+        "className": "",
+        "selected": false
       },
       {
         "source": "Parser-context",
@@ -2382,7 +2784,13 @@
             ],
             "type": "str"
           }
-        }
+        },
+        "sourceHandle": "{\u0153dataType\u0153:\u0153ParserComponent\u0153,\u0153id\u0153:\u0153Parser-context\u0153,\u0153name\u0153:\u0153parsed_text\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}",
+        "targetHandle": "{\u0153fieldName\u0153:\u0153context\u0153,\u0153id\u0153:\u0153Prompt-rag\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "id": "reactflow__edge-Parser-context{\u0153dataType\u0153:\u0153ParserComponent\u0153,\u0153id\u0153:\u0153Parser-context\u0153,\u0153name\u0153:\u0153parsed_text\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}-Prompt-rag{\u0153fieldName\u0153:\u0153context\u0153,\u0153id\u0153:\u0153Prompt-rag\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "animated": false,
+        "className": "",
+        "selected": false
       },
       {
         "source": "ChatInput-rag",
@@ -2404,7 +2812,13 @@
             ],
             "type": "str"
           }
-        }
+        },
+        "sourceHandle": "{\u0153dataType\u0153:\u0153ChatInput\u0153,\u0153id\u0153:\u0153ChatInput-rag\u0153,\u0153name\u0153:\u0153message\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}",
+        "targetHandle": "{\u0153fieldName\u0153:\u0153question\u0153,\u0153id\u0153:\u0153Prompt-rag\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "id": "reactflow__edge-ChatInput-rag{\u0153dataType\u0153:\u0153ChatInput\u0153,\u0153id\u0153:\u0153ChatInput-rag\u0153,\u0153name\u0153:\u0153message\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}-Prompt-rag{\u0153fieldName\u0153:\u0153question\u0153,\u0153id\u0153:\u0153Prompt-rag\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "animated": false,
+        "className": "",
+        "selected": false
       },
       {
         "source": "Knowledge-retrieve",
@@ -2429,7 +2843,13 @@
             ],
             "type": "other"
           }
-        }
+        },
+        "sourceHandle": "{\u0153dataType\u0153:\u0153Knowledge\u0153,\u0153id\u0153:\u0153Knowledge-retrieve\u0153,\u0153name\u0153:\u0153retrieve_data\u0153,\u0153output_types\u0153:[\u0153Table\u0153]}",
+        "targetHandle": "{\u0153fieldName\u0153:\u0153input_data\u0153,\u0153id\u0153:\u0153Parser-context\u0153,\u0153inputTypes\u0153:[\u0153DataFrame\u0153,\u0153Table\u0153,\u0153Data\u0153,\u0153JSON\u0153],\u0153type\u0153:\u0153other\u0153}",
+        "id": "reactflow__edge-Knowledge-retrieve{\u0153dataType\u0153:\u0153Knowledge\u0153,\u0153id\u0153:\u0153Knowledge-retrieve\u0153,\u0153name\u0153:\u0153retrieve_data\u0153,\u0153output_types\u0153:[\u0153Table\u0153]}-Parser-context{\u0153fieldName\u0153:\u0153input_data\u0153,\u0153id\u0153:\u0153Parser-context\u0153,\u0153inputTypes\u0153:[\u0153DataFrame\u0153,\u0153Table\u0153,\u0153Data\u0153,\u0153JSON\u0153],\u0153type\u0153:\u0153other\u0153}",
+        "animated": false,
+        "className": "",
+        "selected": false
       },
       {
         "source": "ChatInput-rag",
@@ -2451,13 +2871,19 @@
             ],
             "type": "str"
           }
-        }
+        },
+        "sourceHandle": "{\u0153dataType\u0153:\u0153ChatInput\u0153,\u0153id\u0153:\u0153ChatInput-rag\u0153,\u0153name\u0153:\u0153message\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}",
+        "targetHandle": "{\u0153fieldName\u0153:\u0153search_query\u0153,\u0153id\u0153:\u0153Knowledge-retrieve\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "id": "reactflow__edge-ChatInput-rag{\u0153dataType\u0153:\u0153ChatInput\u0153,\u0153id\u0153:\u0153ChatInput-rag\u0153,\u0153name\u0153:\u0153message\u0153,\u0153output_types\u0153:[\u0153Message\u0153]}-Knowledge-retrieve{\u0153fieldName\u0153:\u0153search_query\u0153,\u0153id\u0153:\u0153Knowledge-retrieve\u0153,\u0153inputTypes\u0153:[\u0153Message\u0153],\u0153type\u0153:\u0153str\u0153}",
+        "animated": false,
+        "className": "",
+        "selected": false
       }
     ],
     "viewport": {
-      "x": 0,
-      "y": 0,
-      "zoom": 0.6
+      "x": 20,
+      "y": 121.60000000000002,
+      "zoom": 0.6285714285714286
     }
   },
   "is_component": false,
