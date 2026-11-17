@@ -40,6 +40,11 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
       - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY:-}
+      # Arize Phoenix tracing, same variables as basic-RAG/.env. Langflow's
+      # built-in tracer turns on when PHOENIX_API_KEY is set; each flow is a
+      # Phoenix project named after the flow (spaces become dashes).
+      - PHOENIX_API_KEY=${PHOENIX_API_KEY:-}
+      - PHOENIX_COLLECTOR_ENDPOINT=${PHOENIX_COLLECTOR_ENDPOINT:-https://app.phoenix.arize.com}
       # Expose the keys above as Langflow global variables (selectable in nodes).
       - LANGFLOW_VARIABLES_TO_GET_FROM_ENVIRONMENT=OPENAI_API_KEY,GOOGLE_API_KEY,FIRECRAWL_API_KEY
     volumes:

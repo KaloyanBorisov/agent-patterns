@@ -35,7 +35,7 @@ for path in sys.argv[1:]:
 # Knowledge nodes: show the fields for the selected mode tab (dump() keeps the Ingest defaults).
 INGEST = ("input_df", "column_config", "chunk_size", "allow_duplicates", "metadata_json")
 RETRIEVE = ("search_query", "top_k", "include_metadata", "include_embeddings", "metadata_filter")
-LAYOUT = {"Memory": (760, 560)}
+LAYOUT = {}  # positions come from the build scripts
 for path in sys.argv[1:]:
     flow = json.load(open(path))
     for n in flow["data"]["nodes"]:
