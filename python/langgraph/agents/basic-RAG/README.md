@@ -132,6 +132,64 @@ Chroma uses two storage mechanisms:
 - `chroma.sqlite3` — stores document text, metadata, and collection info
 - `*.bin` files — binary HNSW index for fast vector similarity search
 
+## Diagrams
+
+### Ingest pipeline vs. query pipeline
+
+RAG has two phases. Ingest runs once and turns the docs into vectors in Chroma. Query runs on every question and searches those vectors. Both use the same embedding model, so the question and the chunks end up in the same vector space. That shared space is what makes similarity search meaningful.
+
+![Ingest vs query pipelines](docs/pipelines-ingest-vs-query.png)
+
+[Edit in Lucidchart](https://lucid.app/lucidchart/a865216f-93fd-4a81-83fe-9cfe58d6ae4a/edit)
+
+### Graph control flow
+
+The four nodes and the `decide_to_generate` branch. Colours show what each step costs: a vector store call, an LLM call, or plain Python.
+
+![LangGraph control flow](docs/graph-control-flow.png)
+
+[Edit in Lucidchart](https://lucid.app/lucidchart/47447b3d-9ebd-43c0-8cbd-9fc4648d7205/edit)
+
+### GraphState: who reads and writes what
+
+Each node returns only the fields it changes, and LangGraph merges them into the shared state. `messages` is the only field with a reducer, so it is the only one that accumulates.
+
+![GraphState data flow](docs/graph-state-data-flow.png)
+
+[Edit in Lucidchart](https://lucid.app/lucidchart/ac6a2dc6-327a-491e-a044-5d8379a5065b/edit)
+
+### Retriever setup: fast path vs. slow path
+
+What `get_langgraph_docs_retriever()` decides at import time, including the self-healing case where a crashed earlier run left an empty DB behind.
+
+![Retriever setup decision flow](docs/retriever-setup-flow.png)
+
+[Edit in Lucidchart](https://lucid.app/lucidchart/13881828-6e7f-43de-864f-1b971c3feab9/edit)
+
+### What similarity search does
+
+A 2D cartoon of the vector space. The question becomes a point, and the retriever returns the 4 nearest chunks. Being nearby doesn't guarantee a chunk is useful, so the grader checks each one.
+
+![Embedding space sketch](docs/embedding-space.png)
+
+[Edit in Lucidchart](https://lucid.app/lucidchart/ec86c403-85f8-4f40-aa09-786962e781a1/edit)
+
+### Conversational memory across turns
+
+The three questions from `python agent.py` on one `thread_id`. `messages` grows by two per turn, which is how "it" and "that" get resolved. Only the generation prompt sees the history: retrieval still embeds the raw follow-up question.
+
+![Memory timeline](docs/memory-timeline.png)
+
+[Edit in Lucidchart](https://lucid.app/lucidchart/9bd67bf7-1fad-44cb-a898-655f30530838/edit)
+
+### How basic-RAG compares to the other RAG agents in this repo
+
+All three answer from a vector store. They differ in what happens when retrieval isn't good enough, and in who decides the steps: fixed graph edges or the LLM.
+
+![RAG patterns comparison](docs/rag-patterns-comparison.png)
+
+[Edit in Lucidchart](https://lucid.app/lucidchart/f56398fd-8fb1-4ed7-9f1e-4cb48c91b4a5/edit)
+
 ## Sequence diagrams
 
 ### Startup — building or loading the vectorstore
