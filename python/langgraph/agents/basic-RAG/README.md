@@ -132,6 +132,24 @@ Chroma uses two storage mechanisms:
 - `chroma.sqlite3` — stores document text, metadata, and collection info
 - `*.bin` files — binary HNSW index for fast vector similarity search
 
+## Sequence diagrams
+
+### Startup — building or loading the vectorstore
+
+Runs once when `agent.py` imports `utils.py`. The fast path makes no API calls; the slow path scrapes, chunks and embeds the docs, then persists them.
+
+![Startup sequence diagram](docs/sequence-startup.png)
+
+[Edit in Lucidchart](https://lucid.app/lucidchart/52483002-bbde-48a5-ad45-05468087e67f/edit)
+
+### One question — `graph.invoke()`
+
+The loop retries until grading keeps at least one document. There is no retry cap, so a question the docs can't answer keeps rewriting until LangGraph's `recursion_limit` (default 25) stops the run with an error. The checkpointer saves state after every node, not only at the end.
+
+![Query sequence diagram](docs/sequence-query.png)
+
+[Edit in Lucidchart](https://lucid.app/lucidchart/a7c2eaf6-aecd-42b3-bfe2-10e978090864/edit)
+
 ## Setup
 
 1. Install dependencies:
