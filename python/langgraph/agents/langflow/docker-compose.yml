@@ -1,0 +1,72 @@
+# Langflow + Postgres for the RAG ports described in ../LANGFLOW_PORTING.md.
+# Based on langflow-ai/langflow docker_example/docker-compose.yml (main, v1.13.2).
+#
+#   docker compose up -d      → editor at http://localhost:${LANGFLOW_HOST_PORT:-7860}
+#
+# Local development only: auto-login is on (required for LANGFLOW_LOAD_FLOWS_PATH)
+# and the port is bound to 127.0.0.1.
+
+services:
+  langflow:
+    # "langflow-all" is the full-bundles tier. The default langflowai/langflow
+    # image omits the DuckDuckGo and Firecrawl bundles corrective-rag needs.
+    image: langflowai/langflow-all:1.13.2
+    ports:
+      # Override with LANGFLOW_HOST_PORT in .env if Windows has reserved 7860
+      # (check: netsh interface ipv4 show excludedportrange protocol=tcp).
+      - "127.0.0.1:${LANGFLOW_HOST_PORT:-7860}:7860"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command:
+      - /bin/sh
+      - -c
+      - |
+        export LANGFLOW_DATABASE_URL="$(python -c 'import os; from urllib.parse import quote; print("postgresql://langflow:" + quote(os.environ["POSTGRES_PASSWORD"], safe="") + "@postgres:5432/langflow")')"
+        exec langflow run
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      - LANGFLOW_AUTO_LOGIN=true
+      # Logs, file storage and secret keys live here.
+      - LANGFLOW_CONFIG_DIR=/app/langflow
+      # Knowledge-base vector stores. The default (~/.langflow/knowledge_bases,
+      # i.e. /app/data/...) is not on a volume and is lost when the container is recreated.
+      - LANGFLOW_KNOWLEDGE_BASES_DIR=/app/langflow/knowledge_bases
+      # Flow JSON exported from the editor; loaded on startup.
+      - LANGFLOW_LOAD_FLOWS_PATH=/app/flows
+      # Custom components, one subfolder per sidebar category.
+      - LANGFLOW_COMPONENTS_PATH=/app/components
+      # Model / search API keys. Empty values are fine for providers you don't use.
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY:-}
+      # Arize Phoenix tracing, same variables as basic-RAG/.env. Langflow's
+      # built-in tracer turns on when PHOENIX_API_KEY is set; each flow is a
+      # Phoenix project named after the flow (spaces become dashes).
+      - PHOENIX_API_KEY=${PHOENIX_API_KEY:-}
+      - PHOENIX_COLLECTOR_ENDPOINT=${PHOENIX_COLLECTOR_ENDPOINT:-https://app.phoenix.arize.com}
+      # Expose the keys above as Langflow global variables (selectable in nodes).
+      - LANGFLOW_VARIABLES_TO_GET_FROM_ENVIRONMENT=OPENAI_API_KEY,GOOGLE_API_KEY,FIRECRAWL_API_KEY
+    volumes:
+      - langflow-data:/app/langflow
+      - ./flows:/app/flows
+      - ./components:/app/components
+
+  postgres:
+    # Same pinned Debian base as the upstream example (avoids collation warnings).
+    image: postgres:16-trixie
+    environment:
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: langflow
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U langflow -d langflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - langflow-postgres:/var/lib/postgresql/data
+
+volumes:
+  langflow-postgres:
+  langflow-data:
